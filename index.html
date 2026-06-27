@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fernweh & Files — Travel Brand</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --brown-dark:   #3D2410;
+    --brown-mid:    #6B4A2A;
+    --brown-light:  #A07855;
+    --camel:        #D4A882;
+    --rose-deep:    #B07060;
+    --rose-mid:     #C8907E;
+    --blush:        #F5D5CC;
+    --beige-brown:  #F5EDE0;
+    --beige-pink:   #F7EAE4;
+    --off-white:    #FDFAF6;
+    --text-dark:    #2A1508;
+    --text-mid:     #6B4A2A;
+    --text-muted:   #A07855;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5vw;
+    background: rgba(253,250,246,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 0.5px solid rgba(107,74,42,0.12);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(61,36,16,0.07); }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .nav-logo-icon {
+    width: 36px; height: 36px;
+  }
+  .nav-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; color: var(--brown-dark); letter-spacing: -0.01em;
+  }
+  .nav-logo-text span { color: var(--rose-deep); font-style: italic; }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 2.5rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--brown-mid); text-decoration: none; opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  .nav-cta {
+    background: var(--brown-dark); color: var(--off-white) !important;
+    padding: 0.55rem 1.3rem; opacity: 1 !important;
+    letter-spacing: 0.08em !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--rose-deep) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 4rem 6rem 5vw;
+    background: var(--off-white);
+    position: relative;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute; right: 0; top: 10%; bottom: 10%;
+    width: 0.5px; background: rgba(107,74,42,0.15);
+  }
+
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--rose-deep); margin-bottom: 1.8rem; font-weight: 500;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 28px; height: 0.5px; background: var(--rose-deep);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5.5vw, 5rem);
+    line-height: 1.06; color: var(--brown-dark); margin-bottom: 2rem;
+    font-weight: 400;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--rose-deep);
+    display: block;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem; line-height: 1.85; color: var(--brown-mid);
+    max-width: 380px; margin-bottom: 3rem; font-weight: 300;
+  }
+
+  .hero-actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.7rem;
+    background: var(--brown-dark); color: var(--off-white);
+    padding: 1rem 2.2rem; font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    border: none; cursor: pointer; font-family: 'Inter', sans-serif;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--rose-deep); transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--brown-mid); text-decoration: none;
+    border-bottom: 0.5px solid var(--camel); padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--rose-deep); border-color: var(--rose-deep); }
+
+  .hero-right {
+    position: relative; background: var(--beige-pink); overflow: hidden;
+  }
+  .hero-collage {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: 3fr 2fr;
+    gap: 0.4rem; padding: 1rem;
+  }
+  .hc-block {
+    border-radius: 6px; overflow: hidden;
+    display: flex; align-items: flex-end; padding: 1.2rem;
+    position: relative; cursor: pointer; transition: transform 0.35s;
+  }
+  .hc-block:hover { transform: scale(1.015); }
+  .hc-block:nth-child(1) {
+    grid-row: span 2;
+    background: linear-gradient(155deg, #C8B09A 0%, #8C6040 100%);
+  }
+  .hc-block:nth-child(2) {
+    background: linear-gradient(135deg, #D4A882 0%, #B07060 100%);
+  }
+  .hc-block:nth-child(3) {
+    background: linear-gradient(135deg, #E8C5B5 0%, #C8907E 100%);
+  }
+  .hc-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem; color: rgba(253,250,246,0.9);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    font-style: italic; position: relative; z-index: 1;
+  }
+  .hc-block::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(61,36,16,0.5) 0%, transparent 60%);
+  }
+  .hc-icon {
+    position: absolute; top: 1rem; right: 1rem;
+    font-size: 1.8rem; opacity: 0.35; z-index: 1;
+  }
+
+  .hero-stat-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    display: flex;
+    background: rgba(61,36,16,0.85);
+    backdrop-filter: blur(8px);
+  }
+  .hero-stat {
+    flex: 1; padding: 1.2rem 1.5rem;
+    border-right: 0.5px solid rgba(245,237,224,0.12);
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; color: var(--blush); line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(245,213,204,0.55); margin-top: 4px;
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--beige-brown); padding: 0.85rem 0;
+    overflow: hidden; white-space: nowrap;
+    border-top: 0.5px solid rgba(107,74,42,0.12);
+    border-bottom: 0.5px solid rgba(107,74,42,0.12);
+  }
+  .ticker-inner {
+    display: inline-flex; gap: 3.5rem;
+    animation: ticker-move 22s linear infinite;
+    font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--brown-mid);
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+  }
+  .ticker-sep { color: var(--rose-mid); }
+  @keyframes ticker-move {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTIONS SHARED ── */
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--rose-deep); font-weight: 500; margin-bottom: 1rem;
+  }
+  .section-eyebrow::before { content: ''; width: 22px; height: 0.5px; background: var(--rose-deep); }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--brown-dark); line-height: 1.15; font-weight: 400;
+  }
+  .section-title em { font-style: italic; color: var(--rose-deep); }
+
+  /* ── ABOUT / INTRO ── */
+  .about {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; overflow: hidden;
+  }
+  .about-visual {
+    background: var(--beige-brown);
+    padding: 6rem 4rem; position: relative; overflow: hidden;
+  }
+  .about-shape-1 {
+    position: absolute; width: 280px; height: 340px;
+    border-radius: 140px 140px 0 0;
+    background: var(--camel); opacity: 0.4;
+    top: -40px; left: 40px;
+  }
+  .about-shape-2 {
+    position: absolute; width: 200px; height: 200px; border-radius: 50%;
+    background: var(--blush); opacity: 0.5;
+    bottom: 40px; right: 20px;
+  }
+  .about-shape-3 {
+    position: absolute; width: 100px; height: 100px; border-radius: 50%;
+    background: var(--rose-deep); opacity: 0.18;
+    bottom: 120px; left: 60px;
+  }
+  .about-card {
+    position: relative; z-index: 1;
+    background: var(--off-white); padding: 2rem 2.2rem;
+    border-left: 3px solid var(--rose-deep);
+    margin-top: 60%;
+    max-width: 280px;
+  }
+  .about-card p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; font-style: italic; line-height: 1.65;
+    color: var(--brown-dark);
+  }
+  .about-card cite {
+    display: block; font-size: 0.7rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted); margin-top: 0.7rem;
+    font-style: normal;
+  }
+
+  .about-text {
+    background: var(--off-white);
+    padding: 6rem 5rem 6rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .about-text p {
+    font-size: 0.95rem; line-height: 1.9; color: var(--brown-mid);
+    font-weight: 300; margin-top: 1.5rem;
+  }
+  .about-text p:first-of-type { margin-top: 2rem; }
+  .about-tags {
+    display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.5rem;
+  }
+  .about-tag {
+    padding: 0.5rem 1.1rem;
+    border: 0.5px solid var(--camel); border-radius: 20px;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--brown-mid); cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .about-tag:hover {
+    background: var(--brown-dark); color: var(--off-white);
+    border-color: var(--brown-dark);
+  }
+
+  /* ── DESTINATIONS ── */
+  .destinations {
+    padding: 7rem 5vw;
+    background: var(--beige-pink);
+  }
+  .destinations-head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 3.5rem;
+  }
+  .dest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+  .dest-card {
+    background: var(--off-white);
+    border-radius: 8px; overflow: hidden;
+    cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .dest-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(61,36,16,0.1); }
+  .dest-card-img {
+    height: 200px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .dest-card:nth-child(1) .dest-card-img { background: linear-gradient(145deg, #C8B09A, #8C6040); }
+  .dest-card:nth-child(2) .dest-card-img { background: linear-gradient(145deg, #E8C5B5, #B07060); }
+  .dest-card:nth-child(3) .dest-card-img { background: linear-gradient(145deg, #D4B896, #9A7248); }
+  .dest-card:nth-child(4) .dest-card-img { background: linear-gradient(145deg, #F0D0C0, #C8907E); }
+  .dest-card:nth-child(5) .dest-card-img { background: linear-gradient(145deg, #C4A898, #7A5840); }
+  .dest-card:nth-child(6) .dest-card-img { background: linear-gradient(145deg, #E0C8B8, #B08068); }
+  .dest-flag { font-size: 3.5rem; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15)); }
+  .dest-card-body { padding: 1.5rem; }
+  .dest-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; color: var(--brown-dark); margin-bottom: 0.3rem;
+  }
+  .dest-region {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--text-muted); margin-bottom: 0.8rem;
+  }
+  .dest-desc {
+    font-size: 0.85rem; line-height: 1.7; color: var(--brown-mid);
+    font-weight: 300;
+  }
+  .dest-tag {
+    display: inline-block; margin-top: 1rem;
+    background: var(--beige-pink); color: var(--rose-deep);
+    font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.35rem 0.8rem; border-radius: 20px; font-weight: 500;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 7rem 5vw;
+    background: var(--brown-dark); color: var(--off-white);
+  }
+  .services .section-title { color: var(--beige-brown); }
+  .services .section-eyebrow { color: var(--camel); }
+  .services .section-eyebrow::before { background: var(--camel); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; margin-top: 4rem;
+    background: rgba(245,237,224,0.1);
+    border: 0.5px solid rgba(245,237,224,0.1);
+  }
+  .service-card {
+    background: var(--brown-dark);
+    padding: 2.8rem 2rem;
+    cursor: pointer; transition: background 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--rose-mid); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .service-card:hover { background: rgba(61,36,16,0.7); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-icon {
+    font-size: 2.2rem; margin-bottom: 1.5rem; display: block;
+    filter: grayscale(0.3);
+  }
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; color: var(--blush); margin-bottom: 0.8rem;
+  }
+  .service-desc {
+    font-size: 0.83rem; line-height: 1.8; color: rgba(245,237,224,0.6);
+    font-weight: 300;
+  }
+
+  /* ── FEATURED STORY ── */
+  .stories { padding: 7rem 5vw; background: var(--beige-brown); }
+  .stories-grid {
+    display: grid; grid-template-columns: 3fr 2fr; gap: 1.2rem;
+    margin-top: 3.5rem;
+  }
+  .story-hero {
+    background: var(--brown-dark);
+    border-radius: 8px; padding: 4rem; position: relative; overflow: hidden;
+    min-height: 460px; display: flex; flex-direction: column; justify-content: flex-end;
+    cursor: pointer;
+  }
+  .story-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #5A3020 0%, #2A1508 70%, #1A0D06 100%);
+  }
+  .story-hero-accent {
+    position: absolute; top: -60px; right: -60px; width: 320px; height: 320px;
+    border-radius: 50%; background: var(--rose-deep); opacity: 0.08;
+  }
+  .story-hero-accent-2 {
+    position: absolute; bottom: -40px; left: -40px; width: 200px; height: 200px;
+    border-radius: 50%; background: var(--camel); opacity: 0.07;
+  }
+  .story-content { position: relative; z-index: 1; }
+  .story-tag-pill {
+    display: inline-block; background: var(--rose-deep);
+    color: var(--off-white); font-size: 0.65rem; letter-spacing: 0.14em;
+    text-transform: uppercase; padding: 0.35rem 0.9rem;
+    margin-bottom: 1.3rem; font-weight: 500;
+  }
+  .story-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; line-height: 1.2; color: var(--beige-brown);
+    margin-bottom: 0.9rem;
+  }
+  .story-excerpt {
+    font-size: 0.87rem; line-height: 1.8; color: rgba(245,237,224,0.6);
+    margin-bottom: 1.8rem; font-weight: 300;
+  }
+  .story-meta { font-size: 0.72rem; color: rgba(245,237,224,0.4); }
+  .story-read-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--blush); background: none; border: none;
+    border-bottom: 0.5px solid rgba(245,213,204,0.35);
+    padding-bottom: 2px; margin-top: 1.5rem; cursor: pointer;
+    font-family: 'Inter', sans-serif; transition: color 0.2s, border-color 0.2s;
+  }
+  .story-read-btn:hover { color: var(--camel); border-color: var(--camel); }
+
+  .stories-side { display: flex; flex-direction: column; gap: 1rem; }
+  .story-mini {
+    background: var(--off-white); border-radius: 8px; padding: 1.8rem;
+    flex: 1; cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .story-mini:hover { border-color: var(--rose-mid); transform: translateX(4px); }
+  .story-mini-tag {
+    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--rose-deep); margin-bottom: 0.7rem; font-weight: 500;
+  }
+  .story-mini-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; line-height: 1.38; color: var(--brown-dark); margin-bottom: 0.6rem;
+  }
+  .story-mini-meta { font-size: 0.7rem; color: var(--text-muted); }
+
+  /* ── GALLERY STRIP ── */
+  .gallery-strip {
+    display: flex; overflow-x: auto; gap: 0.8rem; padding: 0 5vw 2rem;
+    background: var(--beige-brown);
+    scrollbar-width: none;
+  }
+  .gallery-strip::-webkit-scrollbar { display: none; }
+  .gallery-item {
+    flex: 0 0 260px; height: 180px; border-radius: 6px; overflow: hidden;
+    cursor: pointer; position: relative; transition: transform 0.3s;
+  }
+  .gallery-item:hover { transform: scale(1.03); }
+  .gallery-item:nth-child(1) { background: linear-gradient(135deg, #D4B896, #8C6040); }
+  .gallery-item:nth-child(2) { background: linear-gradient(135deg, #F0D0C0, #B07060); }
+  .gallery-item:nth-child(3) { background: linear-gradient(135deg, #C8B09A, #7A5840); }
+  .gallery-item:nth-child(4) { background: linear-gradient(135deg, #E8C8B8, #C8907E); }
+  .gallery-item:nth-child(5) { background: linear-gradient(135deg, #D4A882, #9A6848); }
+  .gallery-label {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 1rem;
+    background: linear-gradient(to top, rgba(61,36,16,0.7), transparent);
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 0.85rem; color: rgba(253,250,246,0.9); letter-spacing: 0.05em;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { padding: 7rem 5vw; background: var(--beige-pink); }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .testi-card {
+    background: var(--off-white); border-radius: 8px; padding: 2.2rem;
+    position: relative;
+  }
+  .testi-quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem; color: var(--blush); line-height: 1;
+    position: absolute; top: 1rem; right: 1.5rem; opacity: 0.6;
+  }
+  .testi-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; font-style: italic; line-height: 1.75;
+    color: var(--brown-dark); margin-bottom: 1.5rem;
+  }
+  .testi-author { display: flex; align-items: center; gap: 0.8rem; }
+  .testi-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 500; color: var(--off-white);
+    flex-shrink: 0;
+  }
+  .testi-name {
+    font-size: 0.85rem; font-weight: 500; color: var(--brown-dark);
+  }
+  .testi-loc { font-size: 0.72rem; color: var(--text-muted); }
+
+  /* ── NEWSLETTER ── */
+  .newsletter {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; overflow: hidden;
+  }
+  .nl-left {
+    background: var(--brown-dark); padding: 6rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .nl-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; color: var(--beige-brown); line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .nl-title em { font-style: italic; color: var(--camel); }
+  .nl-sub { font-size: 0.9rem; color: rgba(245,237,224,0.55); line-height: 1.8; font-weight: 300; }
+
+  .nl-right {
+    background: var(--beige-brown); padding: 6rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .nl-form { display: flex; flex-direction: column; gap: 1rem; }
+  .nl-input {
+    border: 0.5px solid rgba(107,74,42,0.25);
+    background: var(--off-white); padding: 1rem 1.3rem;
+    font-family: 'Inter', sans-serif; font-size: 0.875rem;
+    color: var(--brown-dark); outline: none;
+    transition: border-color 0.2s;
+  }
+  .nl-input:focus { border-color: var(--rose-deep); }
+  .nl-input::placeholder { color: var(--text-muted); }
+  .nl-btn {
+    background: var(--rose-deep); color: var(--off-white);
+    padding: 1rem 2rem; font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; border: none; cursor: pointer;
+    font-family: 'Inter', sans-serif; align-self: flex-start;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .nl-btn:hover { background: var(--brown-dark); transform: translateY(-1px); }
+  .nl-note { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--brown-dark); color: var(--beige-brown);
+    padding: 5rem 5vw 2.5rem;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2.5fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 0.5px solid rgba(245,237,224,0.1);
+  }
+  .footer-brand-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; color: var(--beige-brown); margin-bottom: 1rem;
+  }
+  .footer-brand-logo span { color: var(--rose-mid); font-style: italic; }
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 0.9rem; color: var(--camel); margin-bottom: 1rem;
+  }
+  .footer-desc {
+    font-size: 0.82rem; line-height: 1.8; color: rgba(245,237,224,0.45);
+  }
+  .footer-col h4 {
+    font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245,237,224,0.35); margin-bottom: 1.4rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+  .footer-col a {
+    font-size: 0.85rem; color: rgba(245,237,224,0.6);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--camel); }
+
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.72rem; color: rgba(245,237,224,0.28);
+  }
+  .footer-bottom a { color: rgba(245,237,224,0.4); text-decoration: none; }
+  .footer-bottom a:hover { color: var(--camel); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 340px; }
+    .hero-left { padding: 5rem 5vw 3rem; }
+    .about { grid-template-columns: 1fr; }
+    .about-visual { min-height: 340px; }
+    .about-card { margin-top: 40%; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .stories-grid { grid-template-columns: 1fr; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .newsletter { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .dest-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 560px) {
+    .dest-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .hero-stat-bar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <svg class="nav-logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="36" height="36" rx="8" fill="#B07060"/>
+      <path d="M10 26 L18 8 L26 26" stroke="#F7EAE4" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M13 21 L23 21" stroke="#F5D5CC" stroke-width="1.3" stroke-linecap="round"/>
+      <circle cx="18" cy="6.5" r="1.8" fill="#F5D5CC"/>
+    </svg>
+    <span class="nav-logo-text">Fernweh <span>&</span> Files</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#stories">Stories</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Plan a trip</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Travel · Culture · Stories</p>
+    <h1 class="hero-title">
+      Feel the <em>Fernweh</em> — the ache to be somewhere else
+    </h1>
+    <p class="hero-desc">
+      We craft travel experiences rooted in culture, storytelling, and slow discovery. Not packages — journeys that leave something behind in you.
+    </p>
+    <div class="hero-actions">
+      <a href="#destinations" class="btn-primary">Explore destinations →</a>
+      <a href="#stories" class="btn-ghost">Read our stories ↘</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-collage">
+      <div class="hc-block">
+        <span class="hc-icon">🏯</span>
+        <span class="hc-label">East Asia</span>
+      </div>
+      <div class="hc-block">
+        <span class="hc-icon">🌿</span>
+        <span class="hc-label">South Asia</span>
+      </div>
+      <div class="hc-block">
+        <span class="hc-icon">🫒</span>
+        <span class="hc-label">Mediterranean</span>
+      </div>
+    </div>
+    <div class="hero-stat-bar">
+      <div class="hero-stat">
+        <div class="hero-stat-num">48+</div>
+        <div class="hero-stat-label">Destinations</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1.2k</div>
+        <div class="hero-stat-label">Travellers</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">6yr</div>
+        <div class="hero-stat-label">Of stories</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Kyoto in October</span><span class="ticker-sep"> ✦ </span>
+    <span>Morocco by train</span><span class="ticker-sep"> ✦ </span>
+    <span>Kerala backwaters</span><span class="ticker-sep"> ✦ </span>
+    <span>Santorini at dawn</span><span class="ticker-sep"> ✦ </span>
+    <span>Rajasthan in winter</span><span class="ticker-sep"> ✦ </span>
+    <span>Peru's sacred valley</span><span class="ticker-sep"> ✦ </span>
+    <span>Istanbul's bazaars</span><span class="ticker-sep"> ✦ </span>
+    <span>Bali's rice terraces</span><span class="ticker-sep"> ✦ </span>
+    <span>Kyoto in October</span><span class="ticker-sep"> ✦ </span>
+    <span>Morocco by train</span><span class="ticker-sep"> ✦ </span>
+    <span>Kerala backwaters</span><span class="ticker-sep"> ✦ </span>
+    <span>Santorini at dawn</span><span class="ticker-sep"> ✦ </span>
+    <span>Rajasthan in winter</span><span class="ticker-sep"> ✦ </span>
+    <span>Peru's sacred valley</span><span class="ticker-sep"> ✦ </span>
+    <span>Istanbul's bazaars</span><span class="ticker-sep"> ✦ </span>
+    <span>Bali's rice terraces</span><span class="ticker-sep"> ✦ </span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="about-shape-1"></div>
+    <div class="about-shape-2"></div>
+    <div class="about-shape-3"></div>
+    <div class="about-card">
+      <p>"Not all those who wander are lost — some of them are just looking for the right story."</p>
+      <cite>— Our founding belief</cite>
+    </div>
+  </div>
+  <div class="about-text">
+    <span class="section-eyebrow">Who we are</span>
+    <h2 class="section-title">Travel isn't a destination.<br><em>It's a way of seeing.</em></h2>
+    <p>Fernweh & Files is a travel brand built on the belief that the best journeys are the ones that leave you changed. We don't book itineraries — we curate experiences rooted in local culture, slow travel, and genuine human connection.</p>
+    <p>Every destination we feature has been lived in, not just visited. Every story we tell has a real person at its centre. Every trip we plan is designed around what you want to feel, not just what you want to see.</p>
+    <div class="about-tags">
+      <span class="about-tag">Slow travel</span>
+      <span class="about-tag">Cultural immersion</span>
+      <span class="about-tag">Offbeat routes</span>
+      <span class="about-tag">Solo journeys</span>
+      <span class="about-tag">Food trails</span>
+      <span class="about-tag">Heritage stays</span>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="destinations" id="destinations">
+  <div class="destinations-head">
+    <div>
+      <span class="section-eyebrow">Where we go</span>
+      <h2 class="section-title">Destinations that <em>stay with you</em></h2>
+    </div>
+    <a href="#" class="btn-ghost" style="margin-bottom:0.4rem;">View all →</a>
+  </div>
+  <div class="dest-grid">
+    <div class="dest-card">
+      <div class="dest-card-img"><span class="dest-flag">🏯</span></div>
+      <div class="dest-card-body">
+        <div class="dest-region">East Asia · Japan</div>
+        <h3 class="dest-name">Kyoto & Beyond</h3>
+        <p class="dest-desc">Ancient temples, bamboo forests, and tea ceremonies — Kyoto is where Japan's soul lives quietly.</p>
+        <span class="dest-tag">Culture trip</span>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-card-img"><span class="dest-flag">🌸</span></div>
+      <div class="dest-card-body">
+        <div class="dest-region">South Asia · India</div>
+        <h3 class="dest-name">Rajasthan Trails</h3>
+        <p class="dest-desc">Golden forts, indigo merchants, and haveli breakfasts — Rajasthan is a painting you walk into.</p>
+        <span class="dest-tag">Heritage stay</span>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-card-img"><span class="dest-flag">🫒</span></div>
+      <div class="dest-card-body">
+        <div class="dest-region">Mediterranean · Greece</div>
+        <h3 class="dest-name">Greek Islands Slow</h3>
+        <p class="dest-desc">Ferries, fishing boats, and frescoes — island-hop without a schedule and find what you weren't looking for.</p>
+        <span class="dest-tag">Slow travel</span>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-card-img"><span class="dest-flag">🌍</span></div>
+      <div class="dest-card-body">
+        <div class="dest-region">Africa · Morocco</div>
+        <h3 class="dest-name">Morocco by Train</h3>
+        <p class="dest-desc">Blue medinas, Sahara dunes, and mint tea poured from a great height — Morocco rewards the unhurried.</p>
+        <span class="dest-tag">Offbeat route</span>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-card-img"><span class="dest-flag">🌿</span></div>
+      <div class="dest-card-body">
+        <div class="dest-region">Southeast Asia · Bali</div>
+        <h3 class="dest-name">Bali's Interior</h3>
+        <p class="dest-desc">Skip Kuta. Rice terraces, morning offerings, and villages that still live by the Hindu calendar.</p>
+        <span class="dest-tag">Cultural immersion</span>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-card-img"><span class="dest-flag">🏔️</span></div>
+      <div class="dest-card-body">
+        <div class="dest-region">South America · Peru</div>
+        <h3 class="dest-name">Peru's Sacred Valley</h3>
+        <p class="dest-desc">Machu Picchu is just the beginning. The Sacred Valley hides ruins, weavers, and skies with no light pollution.</p>
+        <span class="dest-tag">Food trail</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <span class="section-eyebrow">What we do</span>
+  <h2 class="section-title" style="color:var(--beige-brown); margin-top:0.8rem; max-width:560px;">Every journey, <em style="color:var(--camel);">designed around you</em></h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">🗺️</span>
+      <h3 class="service-name">Custom itineraries</h3>
+      <p class="service-desc">No templates. We craft each journey around your pace, interests, and the things that genuinely move you.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🏡</span>
+      <h3 class="service-name">Heritage stays</h3>
+      <p class="service-desc">Riads, havelis, ryokans, and farm stays — we book you into places with a story of their own.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🎭</span>
+      <h3 class="service-name">Cultural experiences</h3>
+      <p class="service-desc">Cooking with locals, attending festivals from the inside, visiting artisans in their workshops.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">✍️</span>
+      <h3 class="service-name">Travel storytelling</h3>
+      <p class="service-desc">We document your journey — photography, journals, and essays — so the story doesn't fade when you return.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section class="stories" id="stories">
+  <span class="section-eyebrow">From the files</span>
+  <h2 class="section-title">Stories worth <em>getting lost in</em></h2>
+  <div class="stories-grid">
+    <div class="story-hero">
+      <div class="story-hero-accent"></div>
+      <div class="story-hero-accent-2"></div>
+      <div class="story-content">
+        <span class="story-tag-pill">Japan · Culture</span>
+        <h3 class="story-title">The last lantern maker of Gion and his apprentice from São Paulo</h3>
+        <p class="story-excerpt">In a narrow alley off Gion's most photographed street, 78-year-old Hiroshi Tanaka still bends bamboo by hand the way his grandfather taught him — and his only apprentice flew in from Brazil.</p>
+        <p class="story-meta">By Priya Mehta · March 2025 · 12 min read</p>
+        <button class="story-read-btn">Read the full story →</button>
+      </div>
+    </div>
+    <div class="stories-side">
+      <div class="story-mini">
+        <div class="story-mini-tag">Morocco · Food</div>
+        <h3 class="story-mini-title">Seven spices, one grandmother, and a recipe that crossed three continents</h3>
+        <p class="story-mini-meta">By Lena Schneider · 8 min read</p>
+      </div>
+      <div class="story-mini">
+        <div class="story-mini-tag">India · Festivals</div>
+        <h3 class="story-mini-title">What Holi looks like in a village with no tourists and no cameras</h3>
+        <p class="story-mini-meta">By Arjun Rao · 10 min read</p>
+      </div>
+      <div class="story-mini">
+        <div class="story-mini-tag">Greece · People</div>
+        <h3 class="story-mini-title">The fisherman who still refuses to own a smartphone</h3>
+        <p class="story-mini-meta">By Sofia Papadaki · 6 min read</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY STRIP -->
+<div class="gallery-strip">
+  <div class="gallery-item">
+    <span class="gallery-label">Kyoto fog at 6am</span>
+  </div>
+  <div class="gallery-item">
+    <span class="gallery-label">Jaipur sunset market</span>
+  </div>
+  <div class="gallery-item">
+    <span class="gallery-label">Santorini blue domes</span>
+  </div>
+  <div class="gallery-item">
+    <span class="gallery-label">Marrakech medina</span>
+  </div>
+  <div class="gallery-item">
+    <span class="gallery-label">Ubud rice terraces</span>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <span class="section-eyebrow">Traveller words</span>
+  <h2 class="section-title">What people say about <em>their journeys</em></h2>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <span class="testi-quote-mark">"</span>
+      <p class="testi-text">Fernweh & Files didn't plan a trip for me — they planned a version of Japan I didn't even know I wanted. Every single day felt designed, but never staged.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:var(--rose-deep);">AM</div>
+        <div>
+          <div class="testi-name">Anika Müller</div>
+          <div class="testi-loc">Berlin, Germany · Japan trip</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <span class="testi-quote-mark">"</span>
+      <p class="testi-text">I've done Morocco three times with guidebooks. This time, with Fernweh, I finally understood it. The local connections they have are extraordinary.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:var(--brown-mid);">RK</div>
+        <div>
+          <div class="testi-name">Rahul Kapoor</div>
+          <div class="testi-loc">Mumbai, India · Morocco trip</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <span class="testi-quote-mark">"</span>
+      <p class="testi-text">The heritage haveli they booked us into in Jaisalmer had no Tripadvisor listing, no Instagram presence — and the most beautiful rooftop I have ever slept under.</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:var(--camel); color:var(--brown-dark);">SL</div>
+        <div>
+          <div class="testi-name">Sophie Laurent</div>
+          <div class="testi-loc">Paris, France · Rajasthan trip</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="contact">
+  <div class="nl-left">
+    <span class="section-eyebrow" style="color:var(--camel);">Stay wandering</span>
+    <h2 class="nl-title">One letter.<br><em>Every full moon.</em></h2>
+    <p class="nl-sub">A single email with one destination deep-dive, one story, and one thing that made us stop on a street somewhere and just look.</p>
+  </div>
+  <div class="nl-right">
+    <div class="nl-form">
+      <input type="text" class="nl-input" placeholder="Your name">
+      <input type="email" class="nl-input" placeholder="your@email.com">
+      <button class="nl-btn">Subscribe — it's free</button>
+      <p class="nl-note">No spam. Unsubscribe any time. Read by 14,000 slow travellers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-logo">Fernweh <span>&</span> Files</div>
+      <div class="footer-tagline">the ache to wander</div>
+      <p class="footer-desc">Independent travel brand and cultural storytelling studio. We believe travel is an act of empathy — and every journey is a story worth filing away.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#destinations">Destinations</a></li>
+        <li><a href="#stories">Stories</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Food trails</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Custom trips</a></li>
+        <li><a href="#services">Heritage stays</a></li>
+        <li><a href="#services">Cultural tours</a></li>
+        <li><a href="#services">Travel writing</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#about">About us</a></li>
+        <li><a href="#contact">Plan a trip</a></li>
+        <li><a href="#contact">Newsletter</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Fernweh & Files. All rights reserved.</span>
+    <span><a href="#">Privacy</a> · <a href="#">Terms</a> · Built with care</span>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+</script>
+
+</body>
+</html>
